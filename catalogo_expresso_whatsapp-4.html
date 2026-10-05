@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0908">
+<meta name="description" content="Catálogo digital da EXPRESSO Pizzaria, Conveniência e Sorveteria - Patos-PB.">
+<title>EXPRESSO | Pizzaria • Conveniência • Sorveteria</title>
+<style>
+:root{
+  --bg:#090807; --panel:#15110e; --panel2:#211710;
+  --red:#d71920; --red2:#ff3b21; --gold:#ffbd18; --orange:#ff6b18;
+  --cream:#fff4df; --muted:#cfc4b5; --green:#16a34a; --green2:#20c763;
+  --line:rgba(255,189,24,.22); --shadow:0 16px 40px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#fff; background:
+  radial-gradient(circle at 50% -10%,rgba(255,95,20,.18),transparent 35%),
+  linear-gradient(180deg,#080706,#120b08 45%,#080706);
+}
+button,input,select{font:inherit}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,calc(100% - 28px));margin:auto}
+
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,6,5,.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.topbar{min-height:72px;display:flex;align-items:center;gap:14px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{
+  width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#ffcf31,#e51d24 65%,#8d090d);
+  box-shadow:0 8px 24px rgba(255,100,20,.22);font-weight:1000;font-size:20px;
+}
+.brand strong{font-size:24px;letter-spacing:-1px}
+.brand small{display:block;color:var(--gold);font-weight:800;font-size:10px;letter-spacing:.7px}
+.cart-btn{
+  border:1px solid rgba(255,189,24,.35);background:#1b130d;color:#fff;
+  border-radius:14px;padding:11px 14px;display:flex;gap:8px;align-items:center;
+  cursor:pointer;font-weight:900;box-shadow:var(--shadow)
+}
+.badge{min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--red);display:grid;place-items:center;font-size:12px}
+
+.hero{
+  margin:18px 0 20px;padding:28px 22px;border:1px solid var(--line);border-radius:24px;
+  background:
+    linear-gradient(120deg,rgba(125,8,9,.92),rgba(39,18,8,.92) 52%,rgba(11,9,7,.96)),
+    radial-gradient(circle at 85% 30%,#ff8a00,transparent 20%);
+  box-shadow:var(--shadow);overflow:hidden;position:relative;
+}
+.hero:after{
+  content:"";position:absolute;width:260px;height:260px;right:-90px;top:-100px;border-radius:50%;
+  border:28px solid rgba(255,189,24,.11);box-shadow:0 0 80px rgba(255,92,15,.18)
+}
+.hero h1{font-size:clamp(32px,7vw,62px);margin:0 0 4px;font-weight:1000;letter-spacing:-2px}
+.hero h1 span{color:#fff}
+.hero h1 b{color:var(--gold)}
+.hero p{margin:0;color:#ffe6c5;font-weight:700}
+.hero .slogan{margin-top:14px;color:#fff;font-size:clamp(15px,3vw,21px)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.primary,.secondary{
+  border:0;border-radius:13px;padding:13px 17px;font-weight:950;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px
+}
+.primary{background:linear-gradient(135deg,#22c55e,#0e9f49);color:#fff;box-shadow:0 10px 24px rgba(22,163,74,.25)}
+.secondary{background:#fff;color:#17100b}
+.info-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px
+}
+.info{
+  background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:12px;
+  color:var(--muted);font-size:13px
+}
+.info strong{display:block;color:#fff;font-size:14px;margin-bottom:3px}
+
+.toolbar{
+  position:sticky;top:73px;z-index:30;padding:9px 0;background:rgba(9,8,7,.92);backdrop-filter:blur(10px)
+}
+.search{
+  display:flex;align-items:center;background:#15110e;border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:0 13px;gap:9px
+}
+.search input{width:100%;border:0;outline:0;background:transparent;color:#fff;padding:13px 0}
+.search input::placeholder{color:#8e857b}
+.chips{display:flex;gap:8px;overflow:auto;padding:9px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid rgba(255,189,24,.22);background:#15110e;color:#ddd;
+  padding:8px 12px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer}
+.chip.active{background:var(--gold);color:#201306;border-color:var(--gold)}
+
+.section{padding:12px 0 26px}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:13px}
+.section-title h2{margin:0;font-size:24px}
+.section-title p{margin:0;color:#968c81;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{
+  background:linear-gradient(180deg,#1a120d,#100c09);border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:13px;box-shadow:0 8px 24px rgba(0,0,0,.22);
+  transition:.2s transform,.2s border-color
+}
+.card:hover{transform:translateY(-2px);border-color:rgba(255,189,24,.35)}
+.card-top{display:flex;justify-content:space-between;gap:8px}
+.icon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:28px;background:#26150c}
+.card h3{font-size:15px;margin:10px 0 4px;line-height:1.2}
+.card .desc{font-size:11px;color:#9d9287;min-height:29px}
+.price{font-size:20px;color:var(--gold);font-weight:1000;margin:10px 0}
+.price small{font-size:10px;color:#a89c90;font-weight:700}
+.add{
+  width:100%;border:1px solid rgba(255,189,24,.3);background:linear-gradient(135deg,#8e1114,#c51d20);
+  color:#fff;border-radius:11px;padding:10px;cursor:pointer;font-weight:950
+}
+.add:active{transform:scale(.98)}
+.consult{background:#2b2119;border-color:#514032;color:#ddd}
+
+footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 100px;color:#aaa}
+.footer-brand{font-weight:1000;font-size:20px;color:#fff}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+footer p{font-size:13px;line-height:1.6}
+.footer-address{color:#fff;font-weight:800}
+.whatsapp-float{
+  position:fixed;right:16px;bottom:16px;z-index:80;width:58px;height:58px;border-radius:50%;
+  display:grid;place-items:center;background:var(--green2);color:#fff;font-size:29px;
+  box-shadow:0 10px 28px rgba(0,0,0,.5);border:3px solid rgba(255,255,255,.85)
+}
+
+/* Carrinho */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:90;display:none}
+.overlay.open{display:block}
+.cart-panel{
+  position:absolute;right:0;top:0;height:100%;width:min(460px,100%);
+  background:#100c09;border-left:1px solid var(--line);padding:18px;overflow:auto;
+  box-shadow:-20px 0 60px rgba(0,0,0,.5)
+}
+.cart-head{display:flex;justify-content:space-between;align-items:center}
+.close{background:#211710;border:1px solid #49382a;color:#fff;border-radius:10px;width:40px;height:40px;cursor:pointer}
+.cart-list{margin:16px 0}
+.cart-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.cart-row strong{font-size:14px}.cart-row small{display:block;color:#988d82;margin-top:3px}
+.qty{display:flex;align-items:center;gap:7px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid #5b4431;background:#211710;color:#fff;cursor:pointer}
+.form{display:grid;gap:10px;margin-top:16px}
+.form label{font-size:11px;color:#aaa;text-transform:uppercase;font-weight:900;letter-spacing:.4px}
+.form input,.form select,.form textarea{
+  width:100%;background:#18110c;border:1px solid #3a2b20;border-radius:10px;color:#fff;padding:11px;outline:0
+}
+.form textarea{min-height:75px;resize:vertical}
+.total{display:flex;justify-content:space-between;font-size:21px;font-weight:1000;border-top:1px solid #3a2b20;padding-top:14px;margin-top:12px}
+.empty{padding:25px 5px;text-align:center;color:#988d82}
+.whats-checkout{width:100%;margin-top:14px;border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,#22c55e,#0d9f48);color:#fff;font-weight:1000;cursor:pointer}
+.note{font-size:10px;color:#766b61;line-height:1.5;margin-top:8px}
+
+/* Responsivo */
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){
+  .container{width:min(100% - 20px,1120px)}
+  .topbar{min-height:64px}.brand strong{font-size:21px}.brand small{font-size:8px}
+  .brand-mark{width:42px;height:42px}
+  .toolbar{top:65px}
+  .info-strip{grid-template-columns:1fr}
+  .info{padding:10px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .card{padding:10px;border-radius:15px}.icon{width:42px;height:42px;font-size:24px}
+  .card h3{font-size:13px}.card .desc{font-size:10px}
+  .price{font-size:17px}
+  .add{font-size:12px;padding:9px}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container topbar">
+    <a class="brand" href="#">
+      <div class="brand-mark">EX</div>
+      <div><strong>EXPRESSO</strong><small>PIZZARIA • CONVENIÊNCIA • SORVETERIA</small></div>
+    </a>
+    <button class="cart-btn" onclick="openCart()">🛒 Pedido <span class="badge" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1><b>EX</b>PRESSO</h1>
+    <p>PIZZARIA • CONVENIÊNCIA • SORVETERIA</p>
+    <div class="slogan">Mais que sabor, momentos que ficam!</div>
+    <div class="hero-actions">
+      <a class="primary" href="https://wa.me/5583998156585?text=Olá%2C%20vim%20pelo%20catálogo%20da%20EXPRESSO%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">🟢 Pedir pelo WhatsApp</a>
+      <a class="secondary" href="#pizzas">🍕 Ver pizzas</a>
+    </div>
+  </section>
+
+  <section class="info-strip">
+    <div class="info"><strong>📍 Endereço</strong>Rua José Araújo Sobrinho, 267 • Novo Horizonte • Patos-PB</div>
+    <div class="info"><strong>🕒 Atendimento</strong>Seg. a sáb. 07h–22h • Dom. 07h–16h | 20h–22h</div>
+    <div class="info"><strong>📲 Pedidos</strong>WhatsApp / telefone: (83) 99815-6585</div>
+  </section>
+
+  <div class="toolbar">
+    <div class="search">🔎 <input id="search" type="search" placeholder="Buscar produto, pizza, bebida..." oninput="render()"></div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div id="catalog"></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">EXPRESSO</div>
+        <p>Qualidade, preço justo e praticidade para seus melhores momentos.</p>
+        <p class="footer-address">Rua José Araújo Sobrinho, nº 267 — Bairro Novo Horizonte — Patos-PB</p>
+      </div>
+      <div><p><strong>Atendimento</strong><br>Segunda a sábado: 07h às 22h<br>Domingo: 07h às 16h | 20h às 22h</p></div>
+      <div><p><strong>Pedidos</strong><br><a href="https://wa.me/5583998156585" target="_blank" rel="noopener">(83) 99815-6585</a><br>WhatsApp / telefone</p></div>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5583998156585?text=Olá%2C%20vim%20pelo%20catálogo%20da%20EXPRESSO." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">◔</a>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()">
+  <aside class="cart-panel">
+    <div class="cart-head"><h2 style="margin:0">🛒 Seu pedido</h2><button class="close" onclick="closeCart()">✕</button></div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="form">
+      <div><label>Nome</label><input id="customerName" placeholder="Como podemos chamar você?"></div>
+      <div><label>Entrega ou retirada</label><select id="delivery"><option>Entrega</option><option>Retirada na Expresso</option></select></div>
+      <div><label>Endereço / referência</label><input id="address" placeholder="Endereço para entrega"></div>
+      <div><label>Pagamento</label><select id="payment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>A combinar</option></select></div>
+      <div><label>Observações</label><textarea id="notes" placeholder="Ex.: troco para R$ 100, retirar cebola..."></textarea></div>
+    </div>
+    <div class="total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+    <button class="whats-checkout" onclick="checkout()">🟢 FINALIZAR NO WHATSAPP</button>
+    <div class="note">Ao finalizar, o WhatsApp será aberto com o pedido já organizado. O envio da mensagem é confirmado pelo cliente no próprio WhatsApp.</div>
+  </aside>
+</div>
+
+<script>
+const WHATSAPP = "5583998156585";
+
+const products = [
+  // Pizzas
+  {id:"pizza-p",cat:"Pizzas",name:"Pizza P",price:30,icon:"🍕",desc:"4 fatias • sabores selecionados"},
+  {id:"pizza-g",cat:"Pizzas",name:"Pizza G",price:55,icon:"🍕",desc:"8 fatias • sabores selecionados"},
+  // Petiscos
+  {id:"calabresa",cat:"Petiscos",name:"Calabresa acebolada",price:35,icon:"🥘",desc:"Porção"},
+  {id:"batata-p",cat:"Petiscos",name:"Batata frita pequena",price:20,icon:"🍟",desc:"Porção"},
+  {id:"batata-m",cat:"Petiscos",name:"Batata frita média",price:26,icon:"🍟",desc:"Porção"},
+  {id:"batata-g",cat:"Petiscos",name:"Batata frita grande",price:30,icon:"🍟",desc:"Porção"},
+  {id:"file-fritas",cat:"Petiscos",name:"Filé com fritas",price:45,icon:"🥩",desc:"Porção"},
+  // Cervejas
+  {id:"heineken269",cat:"Cervejas",name:"Heineken lata 269ml",price:5.50,icon:"🍺",desc:"Lata"},
+  {id:"skol350",cat:"Cervejas",name:"Skol lata 350ml",price:4.50,icon:"🍺",desc:"Lata"},
+  {id:"amstel350",cat:"Cervejas",name:"Amstel lata 350ml",price:4.50,icon:"🍺",desc:"Lata"},
+  {id:"brahma350",cat:"Cervejas",name:"Brahma lata 350ml",price:4.50,icon:"🍺",desc:"Lata"},
+  {id:"devassa350",cat:"Cervejas",name:"Devassa lata 350ml",price:4,icon:"🍺",desc:"Lata"},
+  {id:"heineken350",cat:"Cervejas",name:"Heineken lata 350ml",price:7,icon:"🍺",desc:"Lata"},
+  {id:"michelob350",cat:"Cervejas",name:"Michelob lata 350ml",price:6,icon:"🍺",desc:"Lata"},
+  {id:"skol473",cat:"Cervejas",name:"Skol latão 473ml",price:4,icon:"🍺",desc:"Latão"},
+  {id:"spaten473",cat:"Cervejas",name:"Spaten latão 473ml",price:6.50,icon:"🍺",desc:"Latão"},
+  {id:"heinekenlong",cat:"Cervejas",name:"Heineken long neck",price:9,icon:"🍺",desc:"Long neck"},
+  {id:"praya",cat:"Cervejas",name:"Praya long neck",price:8,icon:"🍺",desc:"Long neck"},
+  {id:"amstelultra",cat:"Cervejas",name:"Amstel Ultra long neck",price:7,icon:"🍺",desc:"Long neck"},
+  {id:"stella",cat:"Cervejas",name:"Stella long neck",price:8.50,icon:"🍺",desc:"Long neck"},
+  {id:"corona",cat:"Cervejas",name:"Corona long neck",price:9,icon:"🍺",desc:"Long neck"},
+  {id:"micheloblong",cat:"Cervejas",name:"Michelob long neck",price:7.50,icon:"🍺",desc:"Long neck"},
+  {id:"devassa300",cat:"Cervejas",name:"Devassa 300ml",price:3.50,icon:"🍺",desc:"Garrafa"},
+  {id:"amstel300",cat:"Cervejas",name:"Amstel 300ml",price:4,icon:"🍺",desc:"Garrafa"},
+  {id:"skol300",cat:"Cervejas",name:"Skol 300ml",price:null,icon:"🍺",desc:"Preço sob consulta"},
+  {id:"heineken600",cat:"Cervejas",name:"Heineken 600ml",price:13,icon:"🍺",desc:"Garrafa"},
+  {id:"amstel600",cat:"Cervejas",name:"Amstel 600ml",price:8,icon:"🍺",desc:"Garrafa"},
+  // Cachaças
+  {id:"caranguejo",cat:"Cachaças",name:"Caranguejo Ouro Lata",price:7,icon:"🥃",desc:"Lata"},
+  {id:"51ouro",cat:"Cachaças",name:"51 Ouro",price:17.99,icon:"🥃",desc:"Garrafa"},
+  {id:"pitu1l",cat:"Cachaças",name:"Pitu litro",price:15.50,icon:"🥃",desc:"1 litro"},
+  {id:"pitu473",cat:"Cachaças",name:"Pitu Latão 473ml",price:9,icon:"🥃",desc:"473ml"},
+  {id:"matuta300",cat:"Cachaças",name:"Matuta 300ml",price:16,icon:"🥃",desc:"300ml"},
+  {id:"matuta1l",cat:"Cachaças",name:"Matuta 1 litro",price:42,icon:"🥃",desc:"1 litro"},
+  // Energéticos
+  {id:"redbull",cat:"Energéticos",name:"Red Bull",price:12,icon:"⚡",desc:"Lata"},
+  {id:"monster473",cat:"Energéticos",name:"Monster 473ml",price:12,icon:"⚡",desc:"473ml"},
+  {id:"tnt269",cat:"Energéticos",name:"TNT 269ml",price:7,icon:"⚡",desc:"269ml"},
+  {id:"tnt473",cat:"Energéticos",name:"TNT 473ml",price:10,icon:"⚡",desc:"473ml"},
+  // Refrigerantes
+  {id:"jesus",cat:"Refrigerantes",name:"Jesus 350ml",price:5,icon:"🥤",desc:"Lata"},
+  {id:"fys",cat:"Refrigerantes",name:"FYS 350ml",price:5,icon:"🥤",desc:"Lata"},
+  {id:"schweppes",cat:"Refrigerantes",name:"Schweppes 350ml",price:5,icon:"🥤",desc:"Lata"},
+  {id:"spritelemon",cat:"Refrigerantes",name:"Sprite Lemon Fresh 310ml",price:5,icon:"🥤",desc:"Lata"},
+  {id:"cocalata",cat:"Refrigerantes",name:"Coca-Cola lata 350ml",price:5,icon:"🥤",desc:"Lata"},
+  {id:"coca1",cat:"Refrigerantes",name:"Coca-Cola 1 litro",price:9,icon:"🥤",desc:"Garrafa"},
+  {id:"coca2",cat:"Refrigerantes",name:"Coca-Cola 2 litros",price:13,icon:"🥤",desc:"Garrafa"},
+  {id:"fanta2",cat:"Refrigerantes",name:"Fanta 2 litros",price:12,icon:"🥤",desc:"Garrafa"},
+  {id:"sprite2",cat:"Refrigerantes",name:"Sprite 2 litros",price:12,icon:"🥤",desc:"Garrafa"},
+  {id:"it2",cat:"Refrigerantes",name:"IT 2 litros",price:7,icon:"🥤",desc:"Garrafa"},
+  // Água / gás / carvão
+  {id:"agua500",cat:"Água • Gás • Carvão",name:"Água mineral 500ml",price:2,icon:"💧",desc:"Garrafa"},
+  {id:"agua-gas",cat:"Água • Gás • Carvão",name:"Água com gás",price:3,icon:"💧",desc:"Garrafa"},
+  {id:"agua-sertao",cat:"Água • Gás • Carvão",name:"Água Sertão 20 litros",price:10,icon:"💧",desc:"Galão"},
+  {id:"gas",cat:"Água • Gás • Carvão",name:"Gás de cozinha",price:118,icon:"🔥",desc:"Botijão"},
+  {id:"carvao",cat:"Água • Gás • Carvão",name:"Carvão Ipueira 5kg",price:23,icon:"🔥",desc:"Saco 5kg"},
+  // Sorvetes / açaí
+  {id:"bola",cat:"Sorvetes • Açaí",name:"Bola de sorvete",price:1,icon:"🍨",desc:"A partir de R$ 1,00"},
+  {id:"picole",cat:"Sorvetes • Açaí",name:"Picolé",price:2,icon:"🍧",desc:"A partir de R$ 2,00"},
+  {id:"acai",cat:"Sorvetes • Açaí",name:"Açaí",price:7,icon:"🍇",desc:"A partir de R$ 7,00 • complementos à parte"}
+];
+
+const categories = ["Todos",...new Set(products.map(p=>p.cat))];
+let activeCat="Todos";
+let cart={};
+
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+function init(){
+  document.getElementById("chips").innerHTML=categories.map(c=>`<button class="chip ${c==="Todos"?"active":""}" onclick="setCat('${c.replaceAll("'","\\'")}')">${c}</button>`).join("");
+  render();
+}
+function setCat(cat){
+  activeCat=cat;
+  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.textContent===cat));
+  render();
+}
+function render(){
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const filtered=products.filter(p=>(activeCat==="Todos"||p.cat===activeCat) &&
+    (p.name+" "+p.desc+" "+p.cat).toLowerCase().includes(q));
+  const grouped={};
+  filtered.forEach(p=>(grouped[p.cat]??=[]).push(p));
+  document.getElementById("catalog").innerHTML=Object.entries(grouped).map(([cat,items])=>`
+    <section class="section" id="${cat==="Pizzas"?"pizzas":""}">
+      <div class="section-title"><h2>${cat}</h2><p>${items.length} item(ns)</p></div>
+      <div class="grid">${items.map(card).join("")}</div>
+    </section>`).join("") || `<div class="empty">Nenhum produto encontrado.</div>`;
+}
+function card(p){
+  const can=p.price!==null;
+  return `<article class="card">
+    <div class="card-top"><div class="icon">${p.icon}</div></div>
+    <h3>${p.name}</h3><div class="desc">${p.desc}</div>
+    <div class="price">${can?brl(p.price):"Consultar"} ${can?"":"<small>na loja</small>"}</div>
+    <button class="add ${can?"":"consult"}" ${can?`onclick="add('${p.id}')"`:`onclick="quickWhats('${p.name}')"`}>${can?"＋ Adicionar":"💬 Consultar"}</button>
+  </article>`;
+}
+function add(id){
+  const p=products.find(x=>x.id===id);
+  cart[id]=(cart[id]||0)+1;
+  updateCount(); openCart();
+}
+function remove(id){
+  if(!cart[id])return;
+  cart[id]--;
+  if(cart[id]<=0)delete cart[id];
+  updateCount(); drawCart();
+}
+function updateCount(){
+  document.getElementById("cartCount").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+}
+function total(){
+  return Object.entries(cart).reduce((s,[id,q])=>{
+    const p=products.find(x=>x.id===id); return s+p.price*q;
+  },0);
+}
+function openCart(){document.getElementById("overlay").classList.add("open");drawCart()}
+function closeCart(){document.getElementById("overlay").classList.remove("open")}
+function drawCart(){
+  const entries=Object.entries(cart);
+  document.getElementById("cartList").innerHTML=entries.length?entries.map(([id,q])=>{
+    const p=products.find(x=>x.id===id);
+    return `<div class="cart-row"><div><strong>${p.name}</strong><small>${brl(p.price)} cada</small></div>
+      <div class="qty"><button onclick="remove('${id}')">−</button><b>${q}</b><button onclick="add('${id}')">+</button></div></div>`;
+  }).join(""):`<div class="empty">Seu pedido está vazio.<br>Escolha os produtos no catálogo.</div>`;
+  document.getElementById("cartTotal").textContent=brl(total());
+}
+function quickWhats(name){
+  const text=`Olá! Gostaria de consultar o produto "${name}" da EXPRESSO.`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,"_blank");
+}
+function checkout(){
+  const entries=Object.entries(cart);
+  if(!entries.length){alert("Adicione pelo menos um produto ao pedido.");return}
+  const name=document.getElementById("customerName").value.trim()||"Não informado";
+  const delivery=document.getElementById("delivery").value;
+  const address=document.getElementById("address").value.trim()||"Não informado";
+  const payment=document.getElementById("payment").value;
+  const notes=document.getElementById("notes").value.trim()||"Nenhuma";
+  let msg=`🍕 *PEDIDO EXPRESSO*%0A%0A`;
+  entries.forEach(([id,q])=>{
+    const p=products.find(x=>x.id===id);
+    msg+=`${q}x ${p.name} — ${brl(p.price*q)}%0A`;
+  });
+  msg+=`%0A💰 *TOTAL: ${brl(total())}*%0A%0A`;
+  msg+=`👤 *Nome:* ${encodeURIComponent(name)}%0A`;
+  msg+=`📍 *Modalidade:* ${encodeURIComponent(delivery)}%0A`;
+  if(delivery==="Entrega") msg+=`🏠 *Endereço:* ${encodeURIComponent(address)}%0A`;
+  msg+=`💳 *Pagamento:* ${encodeURIComponent(payment)}%0A`;
+  msg+=`📝 *Observações:* ${encodeURIComponent(notes)}`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
+}
+init();
+</script>
+</body>
+</html>
